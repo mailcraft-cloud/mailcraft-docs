@@ -1,0 +1,79 @@
+---
+title: Send Email
+description: 'POST /v1/send'
+api: 'POST /v1/send'
+---
+
+# Send Email
+
+Send a transactional email with AI-generated content.
+
+## Request
+
+```bash
+curl -X POST https://api.mailcraft.cloud/v1/send \
+  -H "Authorization: Bearer mc_your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "welcome",
+    "to": "john@example.com",
+    "data": { "name": "John", "plan": "Pro" },
+    "prompt": "Mention dedicated support",
+    "actions": [{ "label": "Get Started", "url": "https://app.example.com" }]
+  }'
+```
+
+## Parameters
+
+<ParamField body="type" type="string" required>
+  Email type. Describes what kind of email to generate. Examples: `"welcome"`, `"password-reset"`, `"invoice"`, `"otp-code"`.
+</ParamField>
+
+<ParamField body="to" type="string" required>
+  Recipient email address.
+</ParamField>
+
+<ParamField body="data" type="object">
+  Dynamic data for the email. AI will reference these values in the generated content.
+</ParamField>
+
+<ParamField body="prompt" type="string">
+  Optional instructions to steer AI content. Use for tone adjustments, length control, or emphasizing specific information.
+</ParamField>
+
+<ParamField body="actions" type="array">
+  CTA buttons. Maximum 3. Each action needs `label` (string), `url` (HTTPS string), and optional `style` ("primary" or "secondary").
+</ParamField>
+
+## Response
+
+<ResponseField name="id" type="string">
+  Unique send log ID.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  One of: `"sent"`, `"failed"`, `"fallback"`.
+</ResponseField>
+
+```json
+{
+  "id": "clx9abc123def456",
+  "status": "sent"
+}
+```
+
+## Status values
+
+| Status | Description |
+|--------|-------------|
+| `sent` | Email delivered successfully via provider |
+| `fallback` | AI content generation failed, sent with fallback content |
+| `failed` | Provider delivery failed |
+
+## Errors
+
+| Status Code | Description |
+|-------------|-------------|
+| 400 | Missing required fields, invalid action URL, no provider/layout configured |
+| 401 | Invalid or missing API key |
+| 502 | Email provider error |

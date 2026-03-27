@@ -1,0 +1,33 @@
+---
+title: Authentication
+description: 'API key authentication'
+---
+
+# Authentication
+
+## API Keys
+
+Every request to `/v1/send` requires an API key in the `Authorization` header:
+
+```
+Authorization: Bearer mc_your_api_key
+```
+
+API keys start with `mc_` and are 35 characters long.
+
+## Managing keys
+
+Create and manage API keys from the **API Keys** page in the dashboard. Each key has:
+
+- **Name** — descriptive label (e.g., "Production", "Staging")
+- **Last used** — timestamp of most recent API call
+- **Created** — when the key was generated
+
+You can create multiple keys per project and revoke them individually.
+
+## Security
+
+- Keys are stored hashed in the database
+- Provider API keys (Resend, etc.) are encrypted at rest with AES-256-GCM
+- Use different keys for production and development
+- Rotate keys regularly from the dashboard

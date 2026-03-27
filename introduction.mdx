@@ -1,0 +1,61 @@
+---
+title: Introduction
+description: 'Open source transactional email — ship emails, not templates'
+---
+
+# Welcome to MailCraft
+
+MailCraft is an open source transactional email platform for developers. Paste your website URL, we extract your brand, and you send beautiful, on-brand emails with a single API call.
+
+**No templates. No HTML. No MJML.** AI generates the content. Your brand makes it beautiful.
+
+## How it works
+
+<Steps>
+  <Step title="Extract your brand">
+    Paste your website URL. We scan it and extract colors, fonts, logo, tone, and industry using AI.
+  </Step>
+  <Step title="Connect a provider">
+    Plug in your Resend API key. Your emails, your infrastructure.
+  </Step>
+  <Step title="Send with one call">
+    Call `mail.send()` with a type like "welcome" or "invoice" and your data. AI writes the copy, your layout wraps it, the provider delivers it.
+  </Step>
+</Steps>
+
+## Key features
+
+<CardGroup cols={2}>
+  <Card title="Brand Extraction" icon="palette">
+    Automatic extraction of colors, fonts, logo, tone from any URL using Firecrawl + AI
+  </Card>
+  <Card title="AI Content" icon="wand-magic-sparkles">
+    Gemini generates natural, on-brand email copy for any email type
+  </Card>
+  <Card title="Email Layout" icon="table-layout">
+    AI-generated MJML layouts that match your brand — generated once, reused forever
+  </Card>
+  <Card title="Pluggable Providers" icon="plug">
+    Resend out of the box. Extensible to Postmark, SES, SMTP
+  </Card>
+  <Card title="Fluent SDKs" icon="code">
+    Official Node.js and Laravel SDKs with chainable fluent API
+  </Card>
+  <Card title="Open Source" icon="github">
+    MIT licensed. Self-host on your own infrastructure. No vendor lock-in.
+  </Card>
+</CardGroup>
+
+## Quick links
+
+<CardGroup cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Get sending in 2 minutes
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference/overview">
+    Explore the API
+  </Card>
+  <Card title="SDKs" icon="box" href="/sdks/overview">
+    Node.js & Laravel
+  </Card>
+</CardGroup>

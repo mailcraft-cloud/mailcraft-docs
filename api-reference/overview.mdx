@@ -1,0 +1,26 @@
+---
+title: API Overview
+description: 'MailCraft API reference'
+---
+
+# API Overview
+
+The MailCraft API has one primary endpoint for sending emails and REST endpoints for project management.
+
+## Base URL
+
+```
+https://api.mailcraft.cloud
+```
+
+For self-hosted instances, replace with your API URL.
+
+## Authentication
+
+All SDK endpoints use Bearer token authentication:
+
+```
+Authorization: Bearer mc_your_api_key
+```
+
+Dashboard endpoints use JWT cookies (handled automatically by the web app).

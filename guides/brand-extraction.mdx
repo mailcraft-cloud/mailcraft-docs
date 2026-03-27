@@ -1,0 +1,39 @@
+---
+title: Brand Extraction
+description: 'How MailCraft extracts your brand from a URL'
+---
+
+# Brand Extraction
+
+When you paste a URL, MailCraft uses [Firecrawl](https://firecrawl.dev) to scan your website and extract brand information using AI.
+
+## What gets extracted
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| Company name | The name of your company | "Acme Corp" |
+| Primary color | Main brand color | `#FF6B00` |
+| Secondary color | Accent/secondary color | `#1A1A2E` |
+| Background color | Page background | `#FFFFFF` |
+| Font | Primary font family | "Inter" |
+| Logo URL | Direct link to your logo | `https://acme.com/logo.png` |
+| Tone | Voice of your brand | "friendly" |
+| Industry | Business category | "saas" |
+| Description | What your company does | "AI-powered analytics" |
+
+## Fallback values
+
+If extraction fails for any field, defaults are used:
+
+| Field | Default |
+|-------|---------|
+| Colors | `#0f172a` / `#6366f1` / `#ffffff` |
+| Font | Inter |
+| Tone | Friendly |
+| Logo | None (text header) |
+
+## Manual override
+
+You can always edit extracted values from the **Branding** page in the dashboard. Changes take effect immediately for new emails.
+
+To regenerate the email layout after changing brand values, go to **Branding → Email Layout → Regenerate Layout**.

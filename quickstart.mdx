@@ -1,0 +1,93 @@
+---
+title: Quickstart
+description: 'Start sending emails in 2 minutes'
+---
+
+# Quickstart
+
+Get MailCraft running and send your first email.
+
+## 1. Sign up
+
+Go to [app.mailcraft.cloud](https://app.mailcraft.cloud) and sign in with Google or GitHub.
+
+## 2. Set up your brand
+
+You have two options:
+
+<Tabs>
+  <Tab title="Extract from URL">
+    Paste your website URL and click **Extract**. MailCraft scans your site and extracts:
+    - Company name
+    - Brand colors (primary, secondary, background)
+    - Font family
+    - Logo URL
+    - Tone of voice
+    - Industry
+  </Tab>
+  <Tab title="Enter manually">
+    Fill in your brand details manually — company name, pick colors, choose a font and tone.
+  </Tab>
+</Tabs>
+
+## 3. Connect Resend
+
+Enter your [Resend](https://resend.com) API key, from email address, and from name.
+
+<Note>
+  Don't have a Resend account? You can skip this step and use the Playground to preview emails without actually sending them.
+</Note>
+
+## 4. Install the SDK
+
+<CodeGroup>
+```bash npm
+npm install @mailcraft/sdk
+```
+```bash composer
+composer require mailcraft/mailcraft-laravel
+```
+</CodeGroup>
+
+## 5. Send your first email
+
+<CodeGroup>
+```typescript Node.js
+import { MailCraft } from '@mailcraft/sdk'
+
+const mail = new MailCraft({ apiKey: 'mc_your_api_key' })
+
+await mail.create('welcome')
+  .to('john@example.com')
+  .data({ name: 'John', plan: 'Pro' })
+  .send()
+```
+```php Laravel
+use MailCraft\Facades\MailCraft;
+
+MailCraft::create('welcome')
+    ->to('john@example.com')
+    ->data(['name' => 'John', 'plan' => 'Pro'])
+    ->send();
+```
+```bash cURL
+curl -X POST https://api.mailcraft.cloud/v1/send \
+  -H "Authorization: Bearer mc_your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "welcome",
+    "to": "john@example.com",
+    "data": { "name": "John", "plan": "Pro" }
+  }'
+```
+</CodeGroup>
+
+That's it. AI generates the subject and body, your brand layout wraps it, Resend delivers it.
+
+## What happens behind the scenes
+
+1. **AI Content** — Gemini reads the type ("welcome") and data, generates a subject line and body text
+2. **Layout** — The generated content is injected into your MJML email layout (with your colors, font, logo)
+3. **Render** — MJML compiles to email-safe HTML
+4. **Send** — Resend delivers the email
+5. **Log** — Everything is stored in send logs for your audit trail

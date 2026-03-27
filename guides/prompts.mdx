@@ -1,0 +1,39 @@
+---
+title: Prompts
+description: 'Steer AI-generated email content'
+---
+
+# Prompts
+
+The optional `prompt` field gives instructions to the AI about how to write the email.
+
+## Examples
+
+```typescript
+// Control length
+.prompt('Very brief — 1 sentence only')
+
+// Highlight features
+.prompt('Mention the analytics dashboard and API access')
+
+// Set tone
+.prompt('Formal and professional. No casual language.')
+
+// Specific instructions
+.prompt('Include the discount code prominently. Create urgency.')
+```
+
+## When to use prompts
+
+Prompts are optional. The AI already knows the email type, your brand tone, and the data you passed. Use prompts when you want to:
+
+- Override the default tone for a specific email
+- Emphasize specific information
+- Control email length
+- Add context the AI can't infer from the type alone
+
+## When NOT to use prompts
+
+- Don't repeat what's already in `data` — AI sees it
+- Don't write the email content in the prompt — let AI do its job
+- Don't include HTML or formatting — the layout handles that

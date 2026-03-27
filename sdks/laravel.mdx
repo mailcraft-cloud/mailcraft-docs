@@ -1,0 +1,113 @@
+---
+title: Laravel SDK
+description: 'Official Laravel/PHP SDK'
+---
+
+# Laravel SDK
+
+The official Laravel SDK for MailCraft. Auto-discovery, facade, fluent API.
+
+## Install
+
+```bash
+composer require mailcraft/mailcraft-laravel
+```
+
+## Configure
+
+Publish the config:
+
+```bash
+php artisan vendor:publish --tag=mailcraft-config
+```
+
+Add to `.env`:
+
+```env
+MAILCRAFT_API_KEY=mc_your_api_key
+MAILCRAFT_BASE_URL=https://api.mailcraft.cloud  # optional, for self-hosted
+```
+
+## Fluent API
+
+```php
+use MailCraft\Facades\MailCraft;
+
+$result = MailCraft::create('welcome')
+    ->to('john@example.com')
+    ->data(['name' => 'John', 'plan' => 'Pro'])
+    ->prompt('Mention dedicated support')
+    ->action('Get Started', 'https://app.example.com')
+    ->action('View Docs', 'https://docs.example.com', 'secondary')
+    ->send();
+
+// $result['id']     => "clx9abc123..."
+// $result['status'] => "sent"
+```
+
+## Builder methods
+
+| Method | Description |
+|--------|-------------|
+| `->to($email)` | Set recipient |
+| `->data($array)` | Set dynamic data |
+| `->prompt($string)` | Set AI instructions |
+| `->action($label, $url, $style?)` | Add a CTA button (repeatable) |
+| `->actions($array)` | Set all actions at once |
+| `->send()` | Send the email |
+
+## Classic API
+
+```php
+MailCraft::send([
+    'type' => 'welcome',
+    'to' => 'john@example.com',
+    'data' => ['name' => 'John'],
+]);
+```
+
+## Dependency Injection
+
+```php
+use MailCraft\MailCraftClient;
+
+class WelcomeController extends Controller
+{
+    public function __construct(private MailCraftClient $mail) {}
+
+    public function store()
+    {
+        $this->mail->create('welcome')
+            ->to(request('email'))
+            ->data(['name' => request('name')])
+            ->send();
+    }
+}
+```
+
+## Standalone (non-Laravel)
+
+```php
+use MailCraft\MailCraftClient;
+
+$client = new MailCraftClient('mc_your_api_key');
+$client->create('welcome')->to('john@test.com')->send();
+```
+
+## Error handling
+
+```php
+use MailCraft\MailCraftException;
+
+try {
+    MailCraft::create('welcome')->to('john@test.com')->send();
+} catch (MailCraftException $e) {
+    $e->getStatusCode(); // 401
+    $e->getMessage();    // "Invalid API key"
+    $e->getBody();       // parsed response body
+}
+```
+
+<Card title="GitHub" icon="github" href="https://github.com/mailcraft-cloud/mailcraft-laravel">
+  View source code
+</Card>
