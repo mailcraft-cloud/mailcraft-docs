@@ -1,0 +1,38 @@
+---
+title: MailCraft Documentation
+description: Open source transactional email — ship emails, not templates
+template: splash
+hero:
+  tagline: Open source transactional email for developers. One API call. AI writes the copy. Your brand, every time.
+  actions:
+    - text: Get Started
+      link: /getting-started/introduction/
+      icon: right-arrow
+    - text: View on GitHub
+      link: https://github.com/mailcraft-cloud/mailcraft
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+  <Card title="Quickstart" icon="rocket">
+    Set up and send your first email in 2 minutes. [Get started →](/getting-started/quickstart/)
+  </Card>
+  <Card title="API Reference" icon="open-book">
+    One endpoint. Full reference with examples. [View API →](/api-reference/send/)
+  </Card>
+  <Card title="Node.js SDK" icon="seti:javascript">
+    Fluent, type-safe SDK for Node.js and TypeScript. [Install →](/sdks/node/)
+  </Card>
+  <Card title="Laravel SDK" icon="seti:php">
+    Facade, auto-discovery, chainable API. [Install →](/sdks/laravel/)
+  </Card>
+  <Card title="Self-Hosting" icon="linux">
+    One command with Docker Compose. MIT licensed. [Deploy →](/self-hosting/overview/)
+  </Card>
+  <Card title="Core Concepts" icon="puzzle">
+    Types, data, prompts, actions — understand the model. [Learn →](/getting-started/concepts/)
+  </Card>
+</CardGrid>
