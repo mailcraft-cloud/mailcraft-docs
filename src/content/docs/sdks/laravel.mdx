@@ -1,11 +1,9 @@
 ---
 title: Laravel SDK
-description: 'Official Laravel/PHP SDK'
+description: Official Laravel/PHP SDK
 ---
 
-# Laravel SDK
-
-The official Laravel SDK for MailCraft. Auto-discovery, facade, fluent API.
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Install
 
@@ -15,8 +13,6 @@ composer require mailcraft/mailcraft-laravel
 
 ## Configure
 
-Publish the config:
-
 ```bash
 php artisan vendor:publish --tag=mailcraft-config
 ```
@@ -25,7 +21,6 @@ Add to `.env`:
 
 ```env
 MAILCRAFT_API_KEY=mc_your_api_key
-MAILCRAFT_BASE_URL=https://api.mailcraft.cloud  # optional, for self-hosted
 ```
 
 ## Fluent API
@@ -38,11 +33,7 @@ $result = MailCraft::create('welcome')
     ->data(['name' => 'John', 'plan' => 'Pro'])
     ->prompt('Mention dedicated support')
     ->action('Get Started', 'https://app.example.com')
-    ->action('View Docs', 'https://docs.example.com', 'secondary')
     ->send();
-
-// $result['id']     => "clx9abc123..."
-// $result['status'] => "sent"
 ```
 
 ## Builder methods
@@ -52,19 +43,9 @@ $result = MailCraft::create('welcome')
 | `->to($email)` | Set recipient |
 | `->data($array)` | Set dynamic data |
 | `->prompt($string)` | Set AI instructions |
-| `->action($label, $url, $style?)` | Add a CTA button (repeatable) |
+| `->action($label, $url, $style?)` | Add CTA button (repeatable) |
 | `->actions($array)` | Set all actions at once |
 | `->send()` | Send the email |
-
-## Classic API
-
-```php
-MailCraft::send([
-    'type' => 'welcome',
-    'to' => 'john@example.com',
-    'data' => ['name' => 'John'],
-]);
-```
 
 ## Dependency Injection
 
@@ -85,15 +66,6 @@ class WelcomeController extends Controller
 }
 ```
 
-## Standalone (non-Laravel)
-
-```php
-use MailCraft\MailCraftClient;
-
-$client = new MailCraftClient('mc_your_api_key');
-$client->create('welcome')->to('john@test.com')->send();
-```
-
 ## Error handling
 
 ```php
@@ -104,10 +76,5 @@ try {
 } catch (MailCraftException $e) {
     $e->getStatusCode(); // 401
     $e->getMessage();    // "Invalid API key"
-    $e->getBody();       // parsed response body
 }
 ```
-
-<Card title="GitHub" icon="github" href="https://github.com/mailcraft-cloud/mailcraft-laravel">
-  View source code
-</Card>

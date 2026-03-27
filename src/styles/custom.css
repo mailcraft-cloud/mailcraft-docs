@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --sl-font: 'Space Grotesk', system-ui, sans-serif;
+  --sl-font-mono: 'JetBrains Mono', monospace;
+  --sl-color-accent-low: #FFF7ED;
+  --sl-color-accent: #F97316;
+  --sl-color-accent-high: #EA580C;
+}
+
+[data-theme='dark'] {
+  --sl-color-accent-low: #431407;
+  --sl-color-accent: #F97316;
+  --sl-color-accent-high: #FDBA74;
+}

@@ -1,11 +1,9 @@
 ---
 title: Node.js SDK
-description: 'Official Node.js/TypeScript SDK'
+description: Official Node.js/TypeScript SDK
 ---
 
-# Node.js SDK
-
-The official Node.js SDK for MailCraft. TypeScript-first, zero dependencies.
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Install
 
@@ -20,7 +18,7 @@ import { MailCraft } from '@mailcraft/sdk'
 
 const mail = new MailCraft({
   apiKey: 'mc_your_api_key',
-  baseUrl: 'https://api.mailcraft.cloud' // optional, for self-hosted
+  baseUrl: 'https://api.mailcraft.cloud' // optional
 })
 ```
 
@@ -34,19 +32,16 @@ const result = await mail.create('welcome')
   .action('Get Started', 'https://app.example.com')
   .action('View Docs', 'https://docs.example.com', 'secondary')
   .send()
-
-console.log(result.id)     // "clx9abc123..."
-console.log(result.status) // "sent"
 ```
 
 ## Builder methods
 
 | Method | Description |
 |--------|-------------|
-| `.to(email)` | Set recipient email |
+| `.to(email)` | Set recipient |
 | `.data(object)` | Set dynamic data |
 | `.prompt(string)` | Set AI instructions |
-| `.action(label, url, style?)` | Add a CTA button (repeatable) |
+| `.action(label, url, style?)` | Add CTA button (repeatable) |
 | `.actions(array)` | Set all actions at once |
 | `.send()` | Send the email |
 
@@ -57,8 +52,6 @@ await mail.send({
   type: 'welcome',
   to: 'john@example.com',
   data: { name: 'John' },
-  prompt: 'Be formal',
-  actions: [{ label: 'Click', url: 'https://...' }]
 })
 ```
 
@@ -71,20 +64,8 @@ try {
   await mail.create('welcome').to('john@test.com').send()
 } catch (err) {
   if (err instanceof MailCraftError) {
-    console.log(err.statusCode) // 401, 400, 502
+    console.log(err.statusCode) // 401
     console.log(err.message)    // "Invalid API key"
   }
 }
 ```
-
-## TypeScript
-
-Full type definitions included. All methods are fully typed with autocompletion.
-
-```typescript
-import type { SendOptions, SendResult, MailCraftConfig } from '@mailcraft/sdk'
-```
-
-<Card title="GitHub" icon="github" href="https://github.com/mailcraft-cloud/mailcraft-node">
-  View source code
-</Card>

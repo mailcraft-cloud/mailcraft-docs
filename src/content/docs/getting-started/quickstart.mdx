@@ -1,0 +1,93 @@
+---
+title: Quickstart
+description: Start sending emails in 2 minutes
+---
+
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+## 1. Sign up
+
+Go to [app.mailcraft.cloud](https://app.mailcraft.cloud) and sign in with Google, GitHub, or email.
+
+## 2. Set up your brand
+
+<Tabs>
+  <TabItem label="Extract from URL">
+    Paste your website URL and click **Extract**. MailCraft scans your site and extracts company name, brand colors, font, logo, tone, and industry.
+  </TabItem>
+  <TabItem label="Enter manually">
+    Fill in your brand details manually — company name, pick colors, choose a font and tone.
+  </TabItem>
+</Tabs>
+
+## 3. Connect Resend
+
+Enter your [Resend](https://resend.com) API key, from email address, and from name.
+
+:::note
+Don't have a Resend account? You can skip this step and use the Playground to preview emails without actually sending them.
+:::
+
+## 4. Install the SDK
+
+<Tabs>
+  <TabItem label="Node.js">
+    ```bash
+    npm install @mailcraft/sdk
+    ```
+  </TabItem>
+  <TabItem label="Laravel">
+    ```bash
+    composer require mailcraft/mailcraft-laravel
+    ```
+  </TabItem>
+</Tabs>
+
+## 5. Send your first email
+
+<Tabs>
+  <TabItem label="Node.js">
+    ```typescript
+    import { MailCraft } from '@mailcraft/sdk'
+
+    const mail = new MailCraft({ apiKey: 'mc_your_api_key' })
+
+    await mail.create('welcome')
+      .to('john@example.com')
+      .data({ name: 'John', plan: 'Pro' })
+      .send()
+    ```
+  </TabItem>
+  <TabItem label="Laravel">
+    ```php
+    use MailCraft\Facades\MailCraft;
+
+    MailCraft::create('welcome')
+        ->to('john@example.com')
+        ->data(['name' => 'John', 'plan' => 'Pro'])
+        ->send();
+    ```
+  </TabItem>
+  <TabItem label="cURL">
+    ```bash
+    curl -X POST https://api.mailcraft.cloud/v1/send \
+      -H "Authorization: Bearer mc_your_api_key" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "type": "welcome",
+        "to": "john@example.com",
+        "data": { "name": "John", "plan": "Pro" }
+      }'
+    ```
+  </TabItem>
+</Tabs>
+
+That's it. AI generates the subject and body, your brand layout wraps it, Resend delivers it.
+
+## What happens behind the scenes
+
+1. **AI Content** — Gemini reads the type and data, generates a subject line and body
+2. **Layout** — Content is injected into your MJML email layout
+3. **Render** — MJML compiles to email-safe HTML
+4. **Send** — Resend delivers the email
+5. **Log** — Everything is stored in send logs
