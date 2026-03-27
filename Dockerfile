@@ -1,9 +1,16 @@
 FROM node:22-alpine AS build
 WORKDIR /app
+
+# Sharp needs these on Alpine
+RUN apk add --no-cache python3 make g++
+
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
+
+# Verify build output exists
+RUN ls -la dist/ && echo "Build successful"
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
